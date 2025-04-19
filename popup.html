@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FocusZen</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        width: 250px;
+        height: 200px;
+        padding: 20px;
+        background-color: #2d2d2d;
+        color: #fff;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      #focusStatus {
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        cursor: pointer;
+        border-radius: 25px;
+        width: 100%;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      button:active {
+        background-color: #3e8e41;
+      }
+
+      p {
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .status-on {
+        color: #4caf50;
+      }
+
+      .status-off {
+        color: #f44336;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="focusStatus" class="status-off">Focus Mode is OFF</p>
+    <button id="toggleFocus">Toggle Focus Mode</button>
+    <script src="popup.js"></script>
+  </body>
+</html>
