@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -20,6 +20,246 @@
 <body>
   <div>
     <h1>This site is blocked. Stay focused!</h1>
+  </div>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Blocked - FocusZen</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #ff3333, #cc0000);
+      color: white;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .container {
+      max-width: 600px;
+      padding: 40px 20px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.8s ease, floatAnimation 3s ease-in-out infinite;
+    }
+    
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    p {
+      font-size: 18px;
+      margin-bottom: 25px;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+    
+    .icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+    }
+    
+    .button {
+      display: inline-block;
+      background-color: white;
+      color: #cc0000;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .button:active {
+      transform: translateY(-1px);
+    }
+    
+    .timer {
+      font-size: 24px;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+    
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      animation: particleAnimation 15s linear infinite;
+    }
+    
+    @keyframes particleAnimation {
+      0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes floatAnimation {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+    
+    /* Create 20 particles with different positions and speeds */
+    .particle:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 20%; animation-duration: 14s; animation-delay: 1s; }
+    .particle:nth-child(3) { left: 30%; animation-duration: 16s; animation-delay: 2s; }
+    .particle:nth-child(4) { left: 40%; animation-duration: 15s; animation-delay: 0.5s; }
+    .particle:nth-child(5) { left: 50%; animation-duration: 13s; animation-delay: 1.5s; }
+    .particle:nth-child(6) { left: 60%; animation-duration: 17s; animation-delay: 2.5s; }
+    .particle:nth-child(7) { left: 70%; animation-duration: 16s; animation-delay: 0.2s; }
+    .particle:nth-child(8) { left: 80%; animation-duration: 15s; animation-delay: 1.2s; }
+    .particle:nth-child(9) { left: 90%; animation-duration: 14s; animation-delay: 2.2s; }
+    .particle:nth-child(10) { left: 15%; animation-duration: 13s; animation-delay: 0.7s; }
+    
+    .motivational-quote {
+      font-style: italic;
+      margin-top: 30px;
+      font-size: 16px;
+      max-width: 400px;
+      opacity: 0.8;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+      
+      p {
+        font-size: 16px;
+      }
+      
+      .icon {
+        font-size: 50px;
+      }
+      
+      .container {
+        padding: 30px 15px;
+        margin: 0 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  
+  <div class="container">
+    <div class="icon">
+      <i class="fas fa-hand-paper"></i>
+    </div>
+    
+    <h1>This site is blocked</h1>
+    
+    <p>FocusZen has prevented access to help you stay on track with your goals. Remember why you started!</p>
+    
+    <div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px; /* or any height you want */
+  ">
+    <div class="motivational-quote" style="
+      font-size: 1rem;
+      font-style: italic;
+      text-align: center;
+      padding: 1rem;
+    ">
+      "Focus on the task at hand, not the distractions around you."
+    </div>
+  </div>
+  
   </div>
 </body>
 </html>
