@@ -13,6 +13,7 @@ function extractDomain(urlString) {
   }
 }
 
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === "updateFocusSettings") {
       console.log("📦 Background received FocusSessionData:", message);
