@@ -62,8 +62,6 @@
   </body>
 </html> -->
 
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -78,115 +76,105 @@
 
       body {
         font-family: 'Segoe UI', 'Arial', sans-serif;
-        width: 300px;
+        width: 320px;
         min-height: 240px;
         padding: 24px;
-        background: linear-gradient(135deg, #2d2d2d, #222222);
+        background: linear-gradient(145deg, #2b2b2b, #212121);
         color: #f0f0f0;
-        border-radius: 12px;
+        border-radius: 16px;
         text-align: center;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Subtle background pattern */
+      body:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 40%);
+        pointer-events: none;
       }
 
       .header {
-        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+        position: relative;
+      }
+
+      .logo {
+        width: 40px;
+        height: 40px;
+        margin-right: 12px;
+        color: #4caf50;
+        font-size: 28px;
         display: flex;
         align-items: center;
         justify-content: center;
       }
 
-      .logo {
-        width: 36px;
-        height: 36px;
-        margin-right: 10px;
-        color: #4caf50;
-        font-size: 24px;
+      .logo i {
+        filter: drop-shadow(0 2px 4px rgba(76, 175, 80, 0.5));
       }
 
       h1 {
-        font-size: 22px;
+        font-size: 24px;
         font-weight: 600;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.8px;
+        background: linear-gradient(135deg, #f0f0f0, #d0d0d0);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
       .status-container {
         background-color: rgba(255, 255, 255, 0.05);
-        padding: 16px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        transition: all 0.3s ease;
+        padding: 24px;
+        border-radius: 14px;
+        margin-bottom: 24px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .status-container:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
       }
 
       #focusStatus {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 600;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: color 0.3s ease;
+        transition: color 0.4s ease;
+        position: relative;
       }
 
       #focusStatus i {
-        margin-right: 8px;
+        margin-right: 10px;
+        font-size: 20px;
       }
 
-      .button-container {
-        margin-bottom: 10px;
-      }
-
-      button {
-        background: linear-gradient(135deg, #4caf50, #388e3c);
-        color: white;
-        border: none;
-        padding: 14px 20px;
-        cursor: pointer;
-        border-radius: 30px;
-        width: 100%;
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        transition: all 0.3s;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      button i {
-        margin-right: 8px;
-      }
-
-      button:hover {
-        background: linear-gradient(135deg, #45a049, #2d7a30);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      }
-
-      button:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      }
-
-      .footer {
-        font-size: 12px;
-        color: #999;
-        margin-top: 10px;
-      }
-
-      .status-on {
-        color: #4caf50;
-      }
-
-      .status-off {
-        color: #f44336;
-      }
-
-      /* Toggle switch styling */
-      .switch-container {
-        margin-top: 10px;
+      .toggle-container {
+        margin-top: 20px;
+        opacity: 0.7;
       }
 
       .switch {
@@ -194,6 +182,7 @@
         display: inline-block;
         width: 60px;
         height: 30px;
+        pointer-events: none;
       }
 
       .switch input {
@@ -204,12 +193,12 @@
 
       .slider {
         position: absolute;
-        cursor: pointer;
+        cursor: default;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #ccc;
+        background-color: rgba(204, 204, 204, 0.3);
         transition: .4s;
         border-radius: 34px;
       }
@@ -224,22 +213,56 @@
         background-color: white;
         transition: .4s;
         border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
 
       input:checked + .slider {
         background-color: #4CAF50;
       }
 
-      input:focus + .slider {
-        box-shadow: 0 0 1px #4CAF50;
-      }
-
       input:checked + .slider:before {
         transform: translateX(30px);
       }
 
+      .footer {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 10px;
+        letter-spacing: 0.3px;
+        font-style: italic;
+      }
+
+      .status-on {
+        color: #4caf50;
+        text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+      }
+
+      .status-off {
+        color: #f44336;
+        text-shadow: 0 0 10px rgba(244, 67, 54, 0.3);
+      }
+
       .pulse {
-        animation: pulse 2s infinite;
+        animation: pulse 2.5s infinite;
+      }
+
+      .shortcut-hint {
+        font-size: 11px;
+        opacity: 0.7;
+        margin-top: 16px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 6px 12px;
+        border-radius: 12px;
+        display: inline-block;
+      }
+
+      .shortcut-hint kbd {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1px 4px;
+        border-radius: 3px;
+        margin: 0 2px;
+        font-family: monospace;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
       }
 
       @keyframes pulse {
@@ -247,11 +270,44 @@
           box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
         }
         70% {
-          box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+          box-shadow: 0 0 0 12px rgba(76, 175, 80, 0);
         }
         100% {
           box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
         }
+      }
+
+      /* Status icons animation */
+      .rotate-in {
+        animation: rotateIn 0.5s forwards;
+      }
+
+      @keyframes rotateIn {
+        from {
+          transform: rotate(-90deg) scale(0.5);
+          opacity: 0;
+        }
+        to {
+          transform: rotate(0) scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Glow effect for ON state */
+      .glow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center, rgba(76, 175, 80, 0.2), transparent 70%);
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+      }
+
+      .status-on-container .glow {
+        opacity: 1;
       }
     </style>
   </head>
@@ -264,28 +320,22 @@
     </div>
 
     <div class="status-container" id="statusContainer">
+      <div class="glow" id="statusGlow"></div>
       <p id="focusStatus" class="status-off">
         <i class="fas fa-times-circle"></i>
         Focus Mode is OFF
       </p>
       
-      <div class="switch-container">
+      <div class="toggle-container">
         <label class="switch">
-          <input type="checkbox" id="focusToggle">
+          <input type="checkbox" id="focusToggle" disabled>
           <span class="slider"></span>
         </label>
       </div>
-    </div>
-
-    <div class="button-container">
-      <button id="toggleFocus">
-        <i class="fas fa-power-off"></i>
-        Toggle Focus Mode
-      </button>
-    </div>
+      
 
     <div class="footer">
-      Stay productive and distraction-free
+      Eliminate distractions. Enhance productivity.
     </div>
 
     <script src="popup.js"></script>

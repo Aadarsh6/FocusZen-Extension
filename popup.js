@@ -21,79 +21,70 @@
 
 
 // Function to update UI based on focus mode status
+// Function to update UI based on focus mode status
 function updateUI(isFocusModeOn) {
   const statusText = isFocusModeOn ? "Focus Mode is ON" : "Focus Mode is OFF";
   const statusClass = isFocusModeOn ? "status-on" : "status-off";
   const statusIcon = isFocusModeOn ? "fa-check-circle" : "fa-times-circle";
   const containerClass = isFocusModeOn ? "pulse" : "";
+  const containerStateClass = isFocusModeOn ? "status-on-container" : "";
   
-  document.getElementById("focusStatus").textContent = statusText;
-  document.getElementById("focusStatus").className = statusClass;
-  document.getElementById("focusToggle").checked = isFocusModeOn;
-  document.getElementById("statusContainer").className = `status-container ${containerClass}`;
+  // Update status text and class
+  const statusElement = document.getElementById("focusStatus");
+  statusElement.className = statusClass;
   
-  // Update the icon
-  const iconElement = document.getElementById("focusStatus").querySelector("i") || document.createElement("i");
-  iconElement.className = `fas ${statusIcon}`;
-  
-  if (!document.getElementById("focusStatus").contains(iconElement)) {
-    document.getElementById("focusStatus").prepend(iconElement);
-  }
-  
-  // Update button text
-  const buttonText = isFocusModeOn ? "Disable Focus Mode" : "Enable Focus Mode";
-  const buttonIcon = isFocusModeOn ? "fa-pause" : "fa-play";
-  
-  const button = document.getElementById("toggleFocus");
-  button.innerHTML = `<i class="fas ${buttonIcon}"></i>${buttonText}`;
-}
-
-// Toggle focus mode when button is clicked
-document.getElementById("toggleFocus").addEventListener("click", () => {
-  toggleFocusMode();
-});
-
-// Toggle focus mode when switch is clicked
-document.getElementById("focusToggle").addEventListener("change", (e) => {
-  chrome.storage.local.get("focusMode", (data) => {
-    if (data.focusMode !== e.target.checked) {
-      toggleFocusMode();
+  // Create a smooth transition effect
+  statusElement.style.opacity = "0";
+  setTimeout(() => {
+    statusElement.textContent = statusText;
+    
+    // Update the icon with animation
+    const iconElement = statusElement.querySelector("i") || document.createElement("i");
+    iconElement.className = `fas ${statusIcon} rotate-in`;
+    
+    if (!statusElement.contains(iconElement)) {
+      statusElement.prepend(iconElement);
     }
-  });
-});
-
-// Function to toggle focus mode
-function toggleFocusMode() {
-  chrome.storage.local.get("focusMode", (data) => {
-    const newFocusMode = !data.focusMode;
     
-    // Add a visual feedback on click
-    const button = document.getElementById("toggleFocus");
-    button.style.transform = "scale(0.95)";
-    setTimeout(() => {
-      button.style.transform = "";
-    }, 100);
-    
-    chrome.storage.local.set({ focusMode: newFocusMode }, () => {
-      updateUI(newFocusMode);
-      
-      // Show transition animation
-      document.getElementById("statusContainer").style.transform = "scale(1.05)";
-      setTimeout(() => {
-        document.getElementById("statusContainer").style.transform = "";
-      }, 200);
-    });
-  });
+    statusElement.style.opacity = "1";
+  }, 200);
+  
+  // Update toggle switch
+  document.getElementById("focusToggle").checked = isFocusModeOn;
+  
+  // Update container styling
+  const container = document.getElementById("statusContainer");
+  container.className = `status-container ${containerClass} ${containerStateClass}`;
+  
+  // Add a subtle transition effect
+  container.style.transform = "scale(0.98)";
+  setTimeout(() => {
+    container.style.transform = "";
+  }, 300);
 }
 
 // On load, display the current Focus Mode status
-chrome.storage.local.get("focusMode", (data) => {
-  updateUI(data.focusMode || false);
+document.addEventListener("DOMContentLoaded", () => {
+  chrome.storage.local.get("focusMode", (data) => {
+    updateUI(data.focusMode || false);
+    
+    // Add a subtle entrance animation
+    document.body.style.opacity = "0";
+    setTimeout(() => {
+      document.body.style.opacity = "1";
+      document.body.style.transition = "opacity 0.4s ease";
+    }, 100);
+  });
 });
 
-// Add keyboard shortcut support
+// Add keyboard shortcut display (just visual, actual shortcut handling should be in background.js)
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" || e.key === " ") {
-    toggleFocusMode();
+  // This is just for visual feedback in the popup, not for actual toggling
+  if (e.altKey && e.key.toLowerCase() === "f") {
+    const shortcutHint = document.querySelector(".shortcut-hint");
+    shortcutHint.style.backgroundColor = "rgba(76, 175, 80, 0.3)";
+    setTimeout(() => {
+      shortcutHint.style.backgroundColor = "";
+    }, 200);
   }
 });
