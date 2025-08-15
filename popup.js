@@ -53,14 +53,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Add keyboard shortcut display (just visual, actual shortcut handling should be in background.js)
-document.addEventListener("keydown", (e) => {
-  // This is just for visual feedback in the popup, not for actual toggling
-  if (e.altKey && e.key.toLowerCase() === "f") {
-    const shortcutHint = document.querySelector(".shortcut-hint");
-    shortcutHint.style.backgroundColor = "rgba(76, 175, 80, 0.3)";
-    setTimeout(() => {
-      shortcutHint.style.backgroundColor = "";
-    }, 200);
-  }
-});
