@@ -1,7 +1,7 @@
 function updateUI(isFocusModeOn) {
   const statusText = isFocusModeOn ? "Focus Mode is ON" : "Focus Mode is OFF";
   const statusClass = isFocusModeOn ? "status-on" : "status-off";
-  const statusIcon = isFocusModeOn ? "icon-check" : "icon-x";
+  const statusIconSymbol = isFocusModeOn ? "✓" : "X";  // Changed ✗ to X
   const containerClass = isFocusModeOn ? "pulse" : "";
   const containerStateClass = isFocusModeOn ? "status-on-container" : "";
   
@@ -13,18 +13,15 @@ function updateUI(isFocusModeOn) {
   statusElement.style.opacity = "0";
   setTimeout(() => {
     // Update the icon
-    const iconElement = statusElement.querySelector(".icon");
+    const iconElement = statusElement.querySelector(".status-icon");
     if (iconElement) {
-      iconElement.className = `icon ${statusIcon}`;
+      iconElement.textContent = statusIconSymbol;
     }
     
-    // Update text content while preserving the icon
-    const textNode = statusElement.childNodes[statusElement.childNodes.length - 1];
-    if (textNode && textNode.nodeType === Node.TEXT_NODE) {
-      textNode.textContent = statusText;
-    } else {
-      // If no text node exists, create one
-      statusElement.appendChild(document.createTextNode(statusText));
+    // Update the text
+    const textElement = statusElement.querySelector(".status-text");
+    if (textElement) {
+      textElement.textContent = statusText;
     }
     
     statusElement.style.opacity = "1";
