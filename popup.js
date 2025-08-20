@@ -1,7 +1,7 @@
 function updateUI(isFocusModeOn) {
   const statusText = isFocusModeOn ? "Focus Mode is ON" : "Focus Mode is OFF";
   const statusClass = isFocusModeOn ? "status-on" : "status-off";
-  const statusIcon = isFocusModeOn ? "fa-check-circle" : "fa-times-circle";
+  const statusIcon = isFocusModeOn ? "icon-check" : "icon-x";
   const containerClass = isFocusModeOn ? "pulse" : "";
   const containerStateClass = isFocusModeOn ? "status-on-container" : "";
   
@@ -12,14 +12,19 @@ function updateUI(isFocusModeOn) {
   // Create a smooth transition effect
   statusElement.style.opacity = "0";
   setTimeout(() => {
-    statusElement.textContent = statusText;
+    // Update the icon
+    const iconElement = statusElement.querySelector(".icon");
+    if (iconElement) {
+      iconElement.className = `icon ${statusIcon}`;
+    }
     
-    // Update the icon with animation
-    const iconElement = statusElement.querySelector("i") || document.createElement("i");
-    iconElement.className = `fas ${statusIcon} rotate-in`;
-    
-    if (!statusElement.contains(iconElement)) {
-      statusElement.prepend(iconElement);
+    // Update text content while preserving the icon
+    const textNode = statusElement.childNodes[statusElement.childNodes.length - 1];
+    if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+      textNode.textContent = statusText;
+    } else {
+      // If no text node exists, create one
+      statusElement.appendChild(document.createTextNode(statusText));
     }
     
     statusElement.style.opacity = "1";
@@ -52,4 +57,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100);
   });
 });
-

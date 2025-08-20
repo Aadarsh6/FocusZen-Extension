@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Site Blocked - FocusZen</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -15,7 +14,7 @@
     body {
       background: linear-gradient(135deg, #ff3333, #cc0000);
       color: white;
-      font-family: 'Segoe UI', 'Arial', sans-serif;
+      font-family: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
       height: 100vh;
       margin: 0;
       display: flex;
@@ -55,6 +54,10 @@
       font-size: 60px;
       margin-bottom: 20px;
       animation: pulse 2s infinite;
+    }
+
+    .icon::before {
+      content: "✋";
     }
     
     .button {
@@ -208,30 +211,27 @@
   </div>
   
   <div class="container">
-    <div class="icon">
-      <i class="fas fa-hand-paper"></i>
-    </div>
+    <div class="icon"></div>
     
     <h1>This site is blocked</h1>
     
     <p>FocusZen has prevented access to help you stay on track with your goals. Remember why you started!</p>
     
     <div style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70px; /* or any height you want */
-  ">
-    <div class="motivational-quote" style="
-      font-size: 1rem;
-      font-style: italic;
-      text-align: center;
-      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70px;
     ">
-      "Focus on the task at hand, not the distractions around you."
+      <div class="motivational-quote" style="
+        font-size: 1rem;
+        font-style: italic;
+        text-align: center;
+        padding: 1rem;
+      ">
+        "Focus on the task at hand, not the distractions around you."
+      </div>
     </div>
-  </div>
-  
   </div>
 </body>
 </html>
