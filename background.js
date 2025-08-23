@@ -13,36 +13,36 @@ function extractDomain(urlString) {
   }
 }
 
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === "updateFocusSettings") {
-      console.log("📦 Background received FocusSessionData:", message);
-  
-      chrome.storage.local.set({
-        allowedSites: message.allowedSites,
-        focusTime: message.focusTime,
-        focusMode: true,
-      }, () => {
-        console.log("✅ Focus settings saved in chrome.storage.local");
-        sendResponse({ success: true });
-      });
-  
-      return true;
-    }
-  
-    // 🔴 Handle EndFocusSession
-    if (message.type === "disableFocusMode") {
-      chrome.storage.local.set({ focusMode: false }, () => {
-        console.log("🛑 Focus Mode disabled in chrome.storage.local");
-        sendResponse({ success: true });
-      });
-  
-      return true;
-    }
-  });
-  
+  if (message.type === "updateFocusSettings") {
+    console.log("📦 Background received FocusSessionData:", message);
+
+    chrome.storage.local.set({
+      allowedSites: message.allowedSites,
+      focusTime: message.focusTime,
+      focusMode: true,
+    }, () => {
+      console.log("✅ Focus settings saved in chrome.storage.local");
+      sendResponse({ success: true });
+    });
+
+    return true;
+  }
+
+  // 🔴 Handle EndFocusSession
+  if (message.type === "disableFocusMode") {
+    chrome.storage.local.set({ focusMode: false }, () => {
+      console.log("🛑 Focus Mode disabled in chrome.storage.local");
+      sendResponse({ success: true });
+    });
+
+    return true;
+  }
+});
 
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
+  // ✅ Only act on top-level navigation, ignore iframes (ads, embeds, trackers)
+  if (details.frameId !== 0) return;
   if (details.url === 'about:blank') return;
 
   chrome.storage.local.get(["focusMode", "allowedSites", "focusTime"], (data) => {
@@ -53,7 +53,13 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
 
     const isAllowed = data.allowedSites.some((site) => {
       const allowedDomain = extractDomain(site);
-      return currentDomain && allowedDomain && currentDomain.endsWith(allowedDomain);
+
+      // ✅ Match subdomains too (e.g., youtube.com allows music.youtube.com, m.youtube.com, youtu.be)
+      return (
+        currentDomain &&
+        allowedDomain &&
+        (currentDomain === allowedDomain || currentDomain.endsWith("." + allowedDomain))
+      );
     });
 
     console.log("🔍 Checked URL:", currentUrl.href);
